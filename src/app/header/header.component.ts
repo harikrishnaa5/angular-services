@@ -4,9 +4,12 @@ import { SubscribeService } from '../Services/subscribe.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
+  providers: [SubscribeService]
 })
 export class HeaderComponent {
+  constructor(private subService: SubscribeService) {}
+
   selectedTab: string = 'home';
 
   //When HOME Link is clicked
@@ -20,7 +23,6 @@ export class HeaderComponent {
   }
 
   onSubscription() {
-    const subscribe = new SubscribeService()
-    subscribe.OnSubscribeClicked('monthly')
+    this.subService.OnSubscribeClicked('quaterly')
   }
 }

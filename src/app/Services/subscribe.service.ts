@@ -1,5 +1,5 @@
 export class SubscribeService {
-    OnSubscribeClicked(type: string){
-        alert("Thank you for " +type+ " subscription")
-    }
+  OnSubscribeClicked(type: string) {
+    alert('Thank you for ' + type + ' subscription');
+  }
 }
