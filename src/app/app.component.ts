@@ -18,20 +18,43 @@ export class AppComponent {
   //the observer receives all the subscribers who subscribed to myObservable
   myObservable = new Observable((observer) => {
     // observer.next([1, 2, 3, 4, 5, 6]); //next method is used to emit some value
-    setTimeout(() => {observer.next(1)}, 1000);
-    setTimeout(() => {observer.next(2)}, 2000);
-    setTimeout(() => {observer.next(3)}, 3000);
-    setTimeout(() => {observer.next(4)}, 4000);
-    setTimeout(() => {observer.next(5)}, 5000);
-    setTimeout(() => {observer.next(6)}, 6000);
-
+    setTimeout(() => {
+      observer.next(1);
+    }, 1000);
+    setTimeout(() => {
+      observer.next(2);
+    }, 2000);
+    setTimeout(() => {
+      observer.next(3);
+    }, 3000);
+    // setTimeout(() => {observer.error(new Error('Something happened'))}, 3000);
+    setTimeout(() => {
+      observer.next(4);
+    }, 4000);
+    setTimeout(() => {
+      observer.next(5);
+    }, 5000);
+    setTimeout(() => {
+      observer.next(6);
+    }, 6000);
+    setTimeout(() => {
+      observer.complete();
+    }, 6000);
   });
 
   GetAsyncData() {
     //observer
     //next error complete
-    this.myObservable.subscribe((value: any) => {
-      this.data.push(value)
+    this.myObservable.subscribe({
+      next: (value: any) => {
+        this.data.push(value);
+      },
+      error(err) {
+        alert(err.message);
+      },
+      complete() {
+        alert('All the data is streamed');
+      },
     });
   }
 }
