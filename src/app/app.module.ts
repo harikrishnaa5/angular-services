@@ -11,6 +11,7 @@ import { SidebarComponent } from './header/home/sidebar/sidebar.component';
 import { HeroComponent } from './header/home/hero/hero.component';
 import { SubscribeService } from './Services/subscribe.service';
 import { UserService } from './Services/users.service';
+import { LoggerService } from './Services/logger.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { UserService } from './Services/users.service';
     HeroComponent,
   ],
   imports: [BrowserModule, FormsModule],
-  providers: [SubscribeService, UserService],
+  providers: [SubscribeService, UserService, LoggerService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
