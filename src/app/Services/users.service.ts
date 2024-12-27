@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { User } from '../Models/user';
 import { LoggerService } from './logger.service';
 
@@ -13,6 +13,8 @@ export class UserService {
     new User('Diana', 'Female', 'Quaterly', 'Active'),
   ];
 
+  userDetails: EventEmitter<User> = new EventEmitter<User>();
+
   GetAllUsers() {
     return this.users;
   }
@@ -20,5 +22,8 @@ export class UserService {
     const newUser = new User(name, gender, subType, status);
     this.users.push(newUser);
     this.loggerService.LogMessage(name, status)
+  }
+  onAddClick(user: User) {
+    this.userDetails.emit(user)
   }
 }
