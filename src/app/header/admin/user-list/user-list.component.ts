@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { USER_SERVICE } from 'src/app/app.module';
 import { UserService } from 'src/app/Services/users.service';
 
 @Component({
@@ -8,6 +9,6 @@ import { UserService } from 'src/app/Services/users.service';
   // providers:[UserService]     no need for this. here this will override the instance from the admin component.
 })
 export class UserListComponent {
-  constructor(private userService: UserService) {}
+  constructor(@Inject (USER_SERVICE) private userService: UserService) {}
   userList = this.userService.GetAllUsers();
 }

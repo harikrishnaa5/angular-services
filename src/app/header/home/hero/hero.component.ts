@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { SubscribeService } from 'src/app/Services/subscribe.service';
 
 @Component({
@@ -9,10 +9,11 @@ import { SubscribeService } from 'src/app/Services/subscribe.service';
 })
 export class HeroComponent {
   //using this constructor we are telling angular how to provide the dependency
-  constructor(private subService: SubscribeService) {
+  // constructor(private subService: SubscribeService) {}
 
-  }
+  //also we can tell angular this by using an 'inject' function
+  subService = inject(SubscribeService)
   onSubscription() {
-    this.subService.OnSubscribeClicked('yearly')
+    this.subService.OnSubscribeClicked('yearly');
   }
 }
