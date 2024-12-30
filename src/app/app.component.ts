@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { SubscribeService } from './Services/subscribe.service';
-import { from, Observable, of } from 'rxjs';
+import { from, fromEvent, Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +8,7 @@ import { from, Observable, of } from 'rxjs';
   styleUrls: ['./app.component.css'],
   // providers: [SubscribeService]
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit{
   // title = 'angular-services-dependency-injection';
   title = 'angular-observable';
 
@@ -43,6 +43,11 @@ export class AppComponent {
   //   }, 6000);
   // });
 
+  @ViewChild('createBtn')
+  createBtn: ElementRef;
+
+  createBtnObs;
+
   myObservable1 = of(this.array1, this.array2)
   myObservable2 = from('487564839')
   myPromise = new Promise((resolve, reject) => {
@@ -65,5 +70,25 @@ export class AppComponent {
         alert('All the data is streamed');
       },
     });
+  }
+
+  buttonClicked () {
+    let value = 0
+    this.createBtnObs = fromEvent(this.createBtn.nativeElement, 'click')
+                        .subscribe((data) => {
+                          console.log(data, 'create btn obs')
+                          this.showList(value++)
+                        })
+  }
+
+  ngAfterViewInit() {
+    this.buttonClicked()
+  }
+
+  showList(value) {
+    let div = document.createElement('div')
+    div.className = 'data-list'
+    div.innerText = `Item ${value}`
+    document.getElementById('container').append(div)
   }
 }
