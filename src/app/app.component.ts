@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { SubscribeService } from './Services/subscribe.service';
-import { from, fromEvent, Observable, of } from 'rxjs';
+import { filter, from, fromEvent, map, Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -8,13 +8,13 @@ import { from, fromEvent, Observable, of } from 'rxjs';
   styleUrls: ['./app.component.css'],
   // providers: [SubscribeService]
 })
-export class AppComponent implements AfterViewInit{
+export class AppComponent implements AfterViewInit {
   // title = 'angular-services-dependency-injection';
   title = 'angular-observable';
 
   data: any[] = [];
-  array1: any[] = [3, 4, 5, 6, 7]
-  array2: any[] = ['e', 'a', 'd', 'g', 'b', 'e']
+  array1: any[] = [3, 4, 5, 6, 7];
+  array2: any[] = ['e', 'a', 'd', 'g', 'b', 'e'];
   //observable
   //the observer receives all the subscribers who subscribed to myObservable
   // myObservable = new Observable((observer) => {
@@ -48,20 +48,37 @@ export class AppComponent implements AfterViewInit{
 
   createBtnObs;
 
-  myObservable1 = of(this.array1, this.array2)
-  myObservable2 = from('487564839')
+  myObservable1 = of(this.array1, this.array2);
+  myObservable2 = from('487564839');
   myPromise = new Promise((resolve, reject) => {
-    resolve([4, 5, 3, 1, 2])
-  })
-  myObservable3 = from(this.myPromise)
+    resolve([4, 5, 3, 1, 2]);
+  });
+  myObservable3 = from([4, 5, 6, 7, 8]);
+
+  myObservableObs = this.myObservable3.pipe(
+    map((item) => {
+      return item * 3;
+    })
+  );
+  filterObs = this.myObservable3.pipe(
+    filter((item) => {
+      return item % 2 === 0;
+    })
+  );
+
+  mapFilterObs = this.myObservable3.pipe(map(item => {
+    return item*3
+  }), filter(value => {
+    return value % 2 === 0
+  }))
 
   GetAsyncData() {
     //observer
     //next error complete
-    this.myObservable3.subscribe({
+    this.mapFilterObs.subscribe({
       next: (value: any) => {
         this.data.push(value);
-        console.log(value)
+        console.log(value);
       },
       error(err) {
         alert(err.message);
@@ -72,23 +89,23 @@ export class AppComponent implements AfterViewInit{
     });
   }
 
-  buttonClicked () {
-    let value = 0
-    this.createBtnObs = fromEvent(this.createBtn.nativeElement, 'click')
-                        .subscribe((data) => {
-                          console.log(data, 'create btn obs')
-                          this.showList(value++)
-                        })
-  }
+  // buttonClicked () {
+  //   let value = 0
+  //   this.createBtnObs = fromEvent(this.createBtn.nativeElement, 'click')
+  //                       .subscribe((data) => {
+  //                         console.log(data, 'create btn obs')
+  //                         this.showList(value++)
+  //                       })
+  // }
 
   ngAfterViewInit() {
-    this.buttonClicked()
+    // this.buttonClicked()
   }
 
-  showList(value) {
-    let div = document.createElement('div')
-    div.className = 'data-list'
-    div.innerText = `Item ${value}`
-    document.getElementById('container').append(div)
-  }
+  // showList(value) {
+  //   let div = document.createElement('div')
+  //   div.className = 'data-list'
+  //   div.innerText = `Item ${value}`
+  //   document.getElementById('container').append(div)
+  // }
 }
