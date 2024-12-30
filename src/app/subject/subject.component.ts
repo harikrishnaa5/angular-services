@@ -49,21 +49,40 @@ export class SubjectComponent implements OnInit {
     // subject.next(2024);
 
     // ASYNC SUBJECT
-    const Subject = new AsyncSubject()
+    // const Subject = new AsyncSubject()
 
-    Subject.next(100)
-    Subject.next(200)
-    Subject.next(300)
-    Subject.next(400)
-    // Subject.complete()
+    // Subject.next(100)
+    // Subject.next(200)
+    // Subject.next(300)
+    // Subject.next(400)
+    // // Subject.complete()
   
-    Subject.subscribe(data => console.log('subscriber1 : ' + data))
+    // Subject.subscribe(data => console.log('subscriber1 : ' + data))
     
-    Subject.subscribe(data => console.log('subscriber2 : ' + data))
-    Subject.next(1400)
-    Subject.complete()
+    // Subject.subscribe(data => console.log('subscriber2 : ' + data))
+    // Subject.next(1400)
+    // Subject.complete()
     
-    Subject.subscribe(data => console.log('subscriber3 : ' + data))
+    // Subject.subscribe(data => console.log('subscriber3 : ' + data))
+
+    // PROMISE 
+    const promise = new Promise((resolve, reject) => {
+      console.log('promise is called')
+      resolve(100)
+      resolve(200)
+      resolve(300)
+    })
+    promise.then((data) => console.log(data, 'promise data'))
+
+    // OBSERVABLE
+    const obs = new Observable((data) => {
+      console.log('observable is called')
+      data.next(100)
+      data.next(200)
+      data.next(300)
+    })
+
+    obs.subscribe((val) => console.log(val))
 
   }
 }
