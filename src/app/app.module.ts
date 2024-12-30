@@ -15,6 +15,7 @@ import { LoggerService } from './Services/logger.service';
 import { NewTaskComponent } from './new-task/new-task.component';
 import { ShowTaskComponent } from './show-task/show-task.component';
 import { SubjectComponent } from './subject/subject.component';
+import { UnsubscribeComponent } from './unsubscribe/unsubscribe.component';
 
 export const USER_SERVICE = new InjectionToken<UserService>('USER_SERVICE')
 
@@ -31,6 +32,7 @@ export const USER_SERVICE = new InjectionToken<UserService>('USER_SERVICE')
     NewTaskComponent,
     ShowTaskComponent,
     SubjectComponent,
+    UnsubscribeComponent,
   ],
   imports: [BrowserModule, FormsModule],
   providers: [
