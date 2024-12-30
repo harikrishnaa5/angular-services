@@ -14,6 +14,7 @@ import { UserService } from './Services/users.service';
 import { LoggerService } from './Services/logger.service';
 import { NewTaskComponent } from './new-task/new-task.component';
 import { ShowTaskComponent } from './show-task/show-task.component';
+import { SubjectComponent } from './subject/subject.component';
 
 export const USER_SERVICE = new InjectionToken<UserService>('USER_SERVICE')
 
@@ -29,6 +30,7 @@ export const USER_SERVICE = new InjectionToken<UserService>('USER_SERVICE')
     HeroComponent,
     NewTaskComponent,
     ShowTaskComponent,
+    SubjectComponent,
   ],
   imports: [BrowserModule, FormsModule],
   providers: [
