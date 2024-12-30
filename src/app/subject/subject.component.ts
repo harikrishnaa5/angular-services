@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject, Observable, ReplaySubject, Subject } from 'rxjs';
+import { AsyncSubject, BehaviorSubject, Observable, ReplaySubject, Subject } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 
 @Component({
@@ -12,9 +12,15 @@ export class SubjectComponent implements OnInit {
     // let obs = new Observable((observer) => {
     //   observer.next(Math.random())
     // })
+
+    // SUBJECT
     // let subject = new Subject();
+
+    // BEHAVIOR SUBJECT
     // let subject = new BehaviorSubject(100);
-    let subject = new ReplaySubject(2);
+
+    // REPLAY SUBJECT
+    // let subject = new ReplaySubject(2);
 
     // const data = ajax('https://randomuser.me/api/');
     // subject.subscribe((res) => console.log(res));
@@ -23,23 +29,41 @@ export class SubjectComponent implements OnInit {
 
     // data.subscribe(subject);
 
-    subject.next(100);
-    subject.next(200);
-    subject.next(300);
+    // subject.next(100);
+    // subject.next(200);
+    // subject.next(300);
 
-    subject.subscribe((data) => {
-      console.log('Subscriber1 ' + data);
-    });
+    // subject.subscribe((data) => {
+    //   console.log('Subscriber1 ' + data);
+    // });
 
-    subject.subscribe((data) => {
-      console.log('Subscriber2 ' + data);
-    });
+    // subject.subscribe((data) => {
+    //   console.log('Subscriber2 ' + data);
+    // });
 
-    subject.next(499);
+    // subject.next(499);
 
-    subject.subscribe((data) => {
-      console.log('Subscriber3 ' + data);
-    });
-    subject.next(2024);
+    // subject.subscribe((data) => {
+    //   console.log('Subscriber3 ' + data);
+    // });
+    // subject.next(2024);
+
+    // ASYNC SUBJECT
+    const Subject = new AsyncSubject()
+
+    Subject.next(100)
+    Subject.next(200)
+    Subject.next(300)
+    Subject.next(400)
+    // Subject.complete()
+  
+    Subject.subscribe(data => console.log('subscriber1 : ' + data))
+    
+    Subject.subscribe(data => console.log('subscriber2 : ' + data))
+    Subject.next(1400)
+    Subject.complete()
+    
+    Subject.subscribe(data => console.log('subscriber3 : ' + data))
+
   }
 }
