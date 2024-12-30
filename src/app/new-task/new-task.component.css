@@ -1,0 +1,17 @@
+.create-task-container {
+  background-color: rgb(22, 22, 79);
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+}
+.create-task-container input,
+.create-task-container button {
+  padding: 10px;
+  font-size: 16px;
+}
+
+button {
+  cursor: pointer;
+}

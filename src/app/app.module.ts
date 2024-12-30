@@ -12,6 +12,8 @@ import { HeroComponent } from './header/home/hero/hero.component';
 import { SubscribeService } from './Services/subscribe.service';
 import { UserService } from './Services/users.service';
 import { LoggerService } from './Services/logger.service';
+import { NewTaskComponent } from './new-task/new-task.component';
+import { ShowTaskComponent } from './show-task/show-task.component';
 
 export const USER_SERVICE = new InjectionToken<UserService>('USER_SERVICE')
 
@@ -25,6 +27,8 @@ export const USER_SERVICE = new InjectionToken<UserService>('USER_SERVICE')
     UserListComponent,
     SidebarComponent,
     HeroComponent,
+    NewTaskComponent,
+    ShowTaskComponent,
   ],
   imports: [BrowserModule, FormsModule],
   providers: [
